@@ -8,7 +8,7 @@ function App() {
         <img src={logo} className="App-logo" alt="logo" />
         <h1>Added startup command</h1>
         <p>
-          Edit <code>src/App.js</code> and save to reload. CI/CD configured and running!
+          Edit <code>src/App.js</code> and save to reload. CI/CD configured and running in the US!
         </p>
         <a
           className="App-link"
