@@ -1,4 +1,4 @@
-async function getPost(url = '', bodyData = {}){
+export async function getPost(url = '', bodyData = {}){
     const response = await fetch(url, {
         method: 'POST',
         mode: 'cors',

@@ -11,6 +11,7 @@ class RegisterPlace extends Component {
         super(props);
 
         this.state = {
+            url: 'api/addPlace',
             name: '',
             invalidName: false,
             address: '',
@@ -81,7 +82,14 @@ class RegisterPlace extends Component {
     generateQr(e){
         e.preventDefault();
         if(this.validateFields()){
+            getPost(this.state.url, 
+                {
+                    "name": this.state.name,
+                    "address": this.state.address,
+                    "capacity": this.state.capacityValue
+                });
             
+            alert("Elemento guardado");
         }
     }
 
