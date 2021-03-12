@@ -3,6 +3,8 @@ import './RegisterPlace.css';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import { getPost } from '../../services/HttpManager';
 
 class RegisterPlace extends Component {
     constructor(props){
@@ -38,6 +40,10 @@ class RegisterPlace extends Component {
                                 onChange={this.handleNonNumericInput}
                                 value={this.state.capacityValue}
                             />
+                            <p></p>
+                            <Button variant="contained" color="primary">
+                                Generar QR
+                            </Button>
                         </form>
                     </CardContent>
                 </Card>
