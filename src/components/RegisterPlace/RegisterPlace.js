@@ -2,16 +2,14 @@ import React, { Component } from 'react';
 import './RegisterPlace.css';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
-import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
-
 
 class RegisterPlace extends Component {
     constructor(props){
         super(props);
 
         this.state = {
-            capacityValue: '',
+            capacityValue: ''
         };
 
         this.handleNonNumericInput = this.handleNonNumericInput.bind(this);
@@ -28,7 +26,7 @@ class RegisterPlace extends Component {
     render(){
         return(
             <div className="Form" style={{backgroundImage:"url('/img/green_background.jpg')"}}>
-                <Card className="FormInput" variant="outlined">
+                <Card className="Card" variant="outlined" style={{backgroundColor: "#baf2e9"}}>
                     <CardContent>
                         <form noValidate autoComplete="off">
                             <TextField className="FormInput" variant="outlined" id="nameField" label="Nombre del local"/>

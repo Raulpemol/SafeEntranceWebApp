@@ -18,6 +18,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
+  "proxy": "https://registrolocales-api.azurewebsites.net/",
   "eslintConfig": {
     "extends": [
       "react-app",

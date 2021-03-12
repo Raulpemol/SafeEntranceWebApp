@@ -8,7 +8,9 @@ function App() {
       <header className="App-header">
         <h1>Bienvenido a SafeEntrance</h1>
       </header>
+      <main>
         <RegisterPlace />
+      </main>
     </div>
   );
 }

@@ -2,15 +2,17 @@
     height: 85vh;
     background-repeat: no-repeat;
     background-size: cover;
+    display: block;
+    align-content: center;
 }
 
 .Card{
-    align-content: center;
+    align-content: initial;
     width: 50%;
 }
 
 .FormInput{
     align-content: center;
-    width: 100vh;
-    padding: 40px 40px;
+    width: 50%;
+    min-width: 1300px;
 }
