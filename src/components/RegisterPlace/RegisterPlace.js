@@ -98,7 +98,7 @@ class RegisterPlace extends Component {
             <div className="Form" style={{backgroundImage:"url('/img/green_background.jpg')"}}>
                 <Card className="Card" variant="outlined" style={{backgroundColor: "#baf2e9"}}>
                     <CardContent>
-                        <form onSubmit={this.generateQr} autoComplete="off">
+                        <form id="formCard" onSubmit={this.generateQr} autoComplete="off">
                             <TextField className="FormInput" variant="outlined" id="nameField" label="Nombre del local" 
                                 onChange={this.handleNameInput}
                                 value={this.state.name}
@@ -117,7 +117,7 @@ class RegisterPlace extends Component {
                                 error={this.state.invalidCapacity}
                             />
                             <p></p>
-                            <Button variant="contained" color="primary" type="submit">
+                            <Button variant="contained" color="primary" type="submit" id="submitButton">
                                 Generar QR
                             </Button>
                         </form>
