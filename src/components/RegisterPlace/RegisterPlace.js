@@ -5,6 +5,7 @@ import CardContent from '@material-ui/core/CardContent';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { getPost } from '../../services/HttpManager';
+import { useHistory } from "react-router-dom";
 
 class RegisterPlace extends Component {
     constructor(props){
@@ -79,17 +80,17 @@ class RegisterPlace extends Component {
         return isValid;
     }
 
-    generateQr(e){
+    async generateQr(e){
         e.preventDefault();
         if(this.validateFields()){
-            getPost(this.state.url, 
-                {
-                    "name": this.state.name,
-                    "address": this.state.address,
-                    "capacity": this.state.capacityValue
-                });
-            
-            alert("Elemento guardado");
+            await getPost(this.state.url, 
+            {
+                "name": this.state.name,
+                "address": this.state.address,
+                "capacity": this.state.capacityValue
+            });
+
+            alert("QR Generado");
         }
     }
 
