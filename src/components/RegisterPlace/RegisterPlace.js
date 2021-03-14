@@ -5,6 +5,7 @@ import CardContent from '@material-ui/core/CardContent';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { getPost } from '../../services/HttpManager';
+import Grid from '@material-ui/core/Grid';
 
 class RegisterPlace extends Component {
     constructor(props){
@@ -96,33 +97,35 @@ class RegisterPlace extends Component {
     render(){
         return(
             <div className="Form" style={{backgroundImage:"url('/img/green_background.jpg')"}}>
-                <Card className="Card" variant="outlined" style={{backgroundColor: "#baf2e9"}}>
-                    <CardContent>
-                        <form id="formCard" onSubmit={this.generateQr} autoComplete="off">
-                            <TextField className="FormInput" variant="outlined" id="nameField" label="Nombre del local" 
-                                onChange={this.handleNameInput}
-                                value={this.state.name}
-                                error={this.state.invalidName}
-                            />
-                            <p></p>
-                            <TextField className="FormInput" variant="outlined" id="addressField" label="Dirección" 
-                                onChange={this.handleAddressInput} 
-                                value={this.state.address}
-                                error={this.state.invalidAddress}
-                            />
-                            <p></p>
-                            <TextField className="FormInput" variant="outlined" id="capacityField" label="Aforo" type="number"
-                                onChange={this.handleCapacityInput}
-                                value={this.state.capacityValue}
-                                error={this.state.invalidCapacity}
-                            />
-                            <p></p>
-                            <Button variant="contained" color="primary" type="submit" id="submitButton">
-                                Generar QR
-                            </Button>
-                        </form>
-                    </CardContent>
-                </Card>
+                <Grid container spacing={0} direction="column" alignItems="center" justify="center">
+                    <Card className="Card" variant="outlined" style={{backgroundColor: "#baf2e9"}}>
+                        <CardContent>
+                            <form id="formCard" onSubmit={this.generateQr} autoComplete="off">
+                                <TextField className="FormInput" variant="outlined" id="nameField" label="Nombre del local" 
+                                    onChange={this.handleNameInput}
+                                    value={this.state.name}
+                                    error={this.state.invalidName}
+                                />
+                                <p></p>
+                                <TextField className="FormInput" variant="outlined" id="addressField" label="Dirección" 
+                                    onChange={this.handleAddressInput} 
+                                    value={this.state.address}
+                                    error={this.state.invalidAddress}
+                                />
+                                <p></p>
+                                <TextField className="FormInput" variant="outlined" id="capacityField" label="Aforo" type="number"
+                                    onChange={this.handleCapacityInput}
+                                    value={this.state.capacityValue}
+                                    error={this.state.invalidCapacity}
+                                />
+                                <p></p>
+                                <Button variant="contained" color="primary" type="submit" id="submitButton">
+                                    Generar QR
+                                </Button>
+                            </form>
+                        </CardContent>
+                    </Card>
+                </Grid>
             </div>
         );
     }
