@@ -1,8 +1,8 @@
 .Form{
+    display: flex;
     height: 85vh;
     background-repeat: no-repeat;
     background-size: cover;
-    display: block;
     align-content: center;
 }
 
