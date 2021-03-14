@@ -19,7 +19,7 @@ class QRGenerator extends Component {
                             value={"prueba"} 
                             size={300}
                         />
-                        <p></p>
+                        <div></div>
                         <Button variant="contained" color="primary" id="submitButton" style={{margin: "10px"}}
                             startIcon={<ArrowBackIcon />}>
                             Volver
@@ -29,6 +29,7 @@ class QRGenerator extends Component {
                             Descargar
                         </Button>
                     </Card>
+                    <div></div>
                 </Grid>
             </div>
         );
