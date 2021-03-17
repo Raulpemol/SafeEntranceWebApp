@@ -29,6 +29,12 @@ class QRGenerator extends Component {
         downloadLink.click();
     }
 
+    goBack = () => {
+        this.props.history.push({
+            pathname: "/"
+        });
+    };
+
     render(){
         return(
             <div className="Main" style={{backgroundImage:"url('/img/green_background.jpg')"}}>
@@ -41,7 +47,8 @@ class QRGenerator extends Component {
                         />
                         <div></div>
                         <Button variant="contained" color="primary" id="submitButton" style={{margin: "10px"}}
-                            startIcon={<ArrowBackIcon />}>
+                            startIcon={<ArrowBackIcon />}
+                            onClick={this.goBack}>
                             Volver
                         </Button>
                         <Button variant="contained" color="primary" id="submitButton" style={{margin: "10px"}}
