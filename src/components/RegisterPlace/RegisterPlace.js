@@ -5,7 +5,8 @@ import CardContent from '@material-ui/core/CardContent';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { getPost } from '../../services/HttpManager';
-import { useHistory } from "react-router-dom";
+import { withRouter } from 'react-router-dom';
+import { Base64 } from "js-base64";
 
 class RegisterPlace extends Component {
     constructor(props){
@@ -81,18 +82,24 @@ class RegisterPlace extends Component {
     }
 
     async generateQr(e){
-        e.preventDefault();
         if(this.validateFields()){
-            await getPost(this.state.url, 
+            /*await getPost(this.state.url, 
             {
                 "name": this.state.name,
                 "address": this.state.address,
                 "capacity": this.state.capacityValue
-            });
+            });*/
 
-            alert("QR Generado");
+            await this.viewQr("hola");
         }
     }
+
+    viewQr = (param) => {
+        const id = Base64.encode(param);
+        this.props.history.push({
+            pathname: "/generated_qr/" + id
+        });
+    };
 
     render(){
         return(
@@ -129,4 +136,4 @@ class RegisterPlace extends Component {
     }
 }
 
-export default RegisterPlace;
+export default withRouter(RegisterPlace);

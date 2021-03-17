@@ -1,7 +1,6 @@
-import { browserHistory } from "react-router";
+import { useHistory  } from "react-router-dom";
 
-export async function viewQrCode(event, placeId) {
+export async function ViewQrCode(event, placeId) {
     event.preventDefault();
-    browserHistory.push("/generated_qr/" + placeId);
-    await reload();
+    useHistory().push("/generated_qr/" + placeId);
 }
