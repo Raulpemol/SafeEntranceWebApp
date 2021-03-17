@@ -91,7 +91,7 @@ class RegisterPlace extends Component {
                 "capacity": this.state.capacityValue
             });
 
-            await this.viewQr("hola");
+            await this.viewQr("holaaaaaa");
         }
     }
 

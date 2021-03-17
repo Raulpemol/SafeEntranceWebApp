@@ -6,11 +6,18 @@ import Button from '@material-ui/core/Button';
 import GetAppIcon from '@material-ui/icons/GetApp';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import Grid from '@material-ui/core/Grid';
+import { withRouter } from 'react-router-dom';
+import { Base64 } from "js-base64";
 
 class QRGenerator extends Component {
     constructor(props){
         super(props);
-
+        var qrInfo = Base64.decode(this.props.location.pathname);
+        qrInfo = qrInfo.split('/');
+        qrInfo = qrInfo[qrInfo.length - 1];
+        this.state = {
+            qrInfo: qrInfo
+        }
         this.downloadQr = this.downloadQr.bind(this);
     }
 
@@ -29,7 +36,7 @@ class QRGenerator extends Component {
                     <Card className="Card" variant="outlined" style={{backgroundColor: "#baf2e9"}}>
                         <QRcode 
                             id="qr"
-                            value={"prueba"} 
+                            value={this.state.qrInfo} 
                             size={300}
                         />
                         <div></div>
@@ -50,4 +57,4 @@ class QRGenerator extends Component {
     }
 }
 
-export default QRGenerator;
+export default withRouter(QRGenerator);
