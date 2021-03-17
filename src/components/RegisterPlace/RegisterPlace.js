@@ -84,14 +84,13 @@ class RegisterPlace extends Component {
     async generateQr(e){
         e.preventDefault();
         if(this.validateFields()){
-            await getPost(this.state.url, 
+            const response = await getPost(this.state.url, 
             {
                 "name": this.state.name,
                 "address": this.state.address,
                 "capacity": this.state.capacityValue
             });
-
-            await this.viewQr("holaaaaaa");
+            await this.viewQr(response);
         }
     }
 

@@ -12,9 +12,10 @@ import { Base64 } from "js-base64";
 class QRGenerator extends Component {
     constructor(props){
         super(props);
-        var qrInfo = Base64.decode(this.props.location.pathname);
-        qrInfo = qrInfo.split('/');
+        const path = this.props.location.pathname;
+        let qrInfo = path.split('/');
         qrInfo = qrInfo[qrInfo.length - 1];
+        qrInfo = Base64.decode(qrInfo);
         this.state = {
             qrInfo: qrInfo
         }
