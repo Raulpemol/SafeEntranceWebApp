@@ -2,7 +2,8 @@ import './App.css';
 import {
   BrowserRouter as Router,
   Switch,
-  Route
+  Route,
+  Redirect
 } from "react-router-dom";
 import RegisterPlace from './components/RegisterPlace/RegisterPlace';
 import QRGenerator from './components/QRGenerator/QRGenerator';
@@ -20,9 +21,10 @@ function App() {
               <Route exact path="/">
                 <RegisterPlace />
               </Route>
-              <Route path="/generated_qr">
+              <Route path="/generated_qr/:id">
                 <QRGenerator />
               </Route>
+              <Redirect to="/404" />
             </Switch>
           </div>
         </Router>
