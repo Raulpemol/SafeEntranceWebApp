@@ -8,6 +8,19 @@ import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import Grid from '@material-ui/core/Grid';
 
 class QRGenerator extends Component {
+    constructor(props){
+        super(props);
+
+        this.downloadQr = this.downloadQr.bind(this);
+    }
+
+    downloadQr(){
+        const img = document.getElementById("qr").toDataURL("image/png").replace("image/png", "image/octet-stream");
+        let downloadLink = document.createElement("a");
+        downloadLink.href = img;
+        downloadLink.download = "QR_SafeEntrance.png";
+        downloadLink.click();
+    }
 
     render(){
         return(
@@ -25,7 +38,8 @@ class QRGenerator extends Component {
                             Volver
                         </Button>
                         <Button variant="contained" color="primary" id="submitButton" style={{margin: "10px"}}
-                            startIcon={<GetAppIcon />}>
+                            startIcon={<GetAppIcon />}
+                            onClick={this.downloadQr}>
                             Descargar
                         </Button>
                     </Card>
