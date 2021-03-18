@@ -13,7 +13,7 @@ class RegisterPlace extends Component {
         super(props);
 
         this.state = {
-            url: 'https://registrolocales-api.azurewebsites.net/api/addPlace',
+            url: 'https://registrolocales-api.azurewebsites.net/api/places/addPlace',
             name: '',
             invalidName: false,
             address: '',

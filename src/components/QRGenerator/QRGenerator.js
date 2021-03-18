@@ -8,6 +8,7 @@ import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import Grid from '@material-ui/core/Grid';
 import { withRouter } from 'react-router-dom';
 import { Base64 } from "js-base64";
+import { getOneParameterResponse } from '../../services/HttpManager';
 
 class QRGenerator extends Component {
     constructor(props){
@@ -17,9 +18,23 @@ class QRGenerator extends Component {
         qrInfo = qrInfo[qrInfo.length - 1];
         qrInfo = Base64.decode(qrInfo);
         this.state = {
-            qrInfo: qrInfo
+            url: 'https://registrolocales-api.azurewebsites.net/api/places/getPlace',
+            qrInfo: qrInfo,
+            invalid: false
         }
+
+        validatePlace();
+
         this.downloadQr = this.downloadQr.bind(this);
+    }
+
+    validatePlace(){
+        const response = await getOneParameterResponse(this.state.url, this.state.qrInfo);
+        if(response == null){
+            this.setState({
+                invalid: true
+            });
+        }
     }
 
     downloadQr(){
@@ -37,31 +52,57 @@ class QRGenerator extends Component {
     };
 
     render(){
-        return(
-            <div className="Main" style={{backgroundImage:"url('/img/green_background.jpg')"}}>
-                <Grid container spacing={0} direction="column" alignItems="center" justify="center">
-                    <Card className="Card" variant="outlined" style={{backgroundColor: "#baf2e9"}}>
-                        <QRcode 
-                            id="qr"
-                            value={this.state.qrInfo} 
-                            size={300}
-                        />
+        if(this.state.invalid){
+            return(
+                <div className="Main" style={{backgroundImage:"url('/img/green_background.jpg')"}}>
+                    <Grid container spacing={0} direction="column" alignItems="center" justify="center">
+                        <Card className="Card" variant="outlined" style={{backgroundColor: "#baf2e9"}}>
+                            <p>El local no es correcto</p>
+                            <div></div>
+                            <Button variant="contained" color="primary" id="submitButton" style={{margin: "10px"}}
+                                startIcon={<ArrowBackIcon />}
+                                onClick={this.goBack}>
+                                Volver
+                            </Button>
+                            <Button variant="contained" color="primary" id="submitButton" style={{margin: "10px"}}
+                                startIcon={<GetAppIcon />}
+                                onClick={this.downloadQr}>
+                                Descargar
+                            </Button>
+                        </Card>
                         <div></div>
-                        <Button variant="contained" color="primary" id="submitButton" style={{margin: "10px"}}
-                            startIcon={<ArrowBackIcon />}
-                            onClick={this.goBack}>
-                            Volver
-                        </Button>
-                        <Button variant="contained" color="primary" id="submitButton" style={{margin: "10px"}}
-                            startIcon={<GetAppIcon />}
-                            onClick={this.downloadQr}>
-                            Descargar
-                        </Button>
-                    </Card>
-                    <div></div>
-                </Grid>
-            </div>
-        );
+                    </Grid>
+                </div>
+            );
+        }
+        else{
+            return(
+                <div className="Main" style={{backgroundImage:"url('/img/green_background.jpg')"}}>
+                    <Grid container spacing={0} direction="column" alignItems="center" justify="center">
+                        <Card className="Card" variant="outlined" style={{backgroundColor: "#baf2e9"}}>
+                            <QRcode 
+                                id="qr"
+                                value={this.state.qrInfo} 
+                                size={300}
+                            />
+                            <div></div>
+                            <Button variant="contained" color="primary" id="submitButton" style={{margin: "10px"}}
+                                startIcon={<ArrowBackIcon />}
+                                onClick={this.goBack}>
+                                Volver
+                            </Button>
+                            <Button variant="contained" color="primary" id="submitButton" style={{margin: "10px"}}
+                                startIcon={<GetAppIcon />}
+                                onClick={this.downloadQr}>
+                                Descargar
+                            </Button>
+                        </Card>
+                        <div></div>
+                    </Grid>
+                </div>
+            );
+        }
+        
     }
 }
 
