@@ -5,13 +5,16 @@ import CardContent from '@material-ui/core/CardContent';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { getPost } from '../../services/HttpManager';
+import Grid from '@material-ui/core/Grid';
+import { withRouter } from 'react-router-dom';
+import { Base64 } from "js-base64";
 
 class RegisterPlace extends Component {
     constructor(props){
         super(props);
 
         this.state = {
-            url: 'https://registrolocales-api.azurewebsites.net/api/addPlace',
+            url: 'https://registrolocales-api.azurewebsites.net/api/places/addPlace',
             name: '',
             invalidName: false,
             address: '',
@@ -79,53 +82,61 @@ class RegisterPlace extends Component {
         return isValid;
     }
 
-    generateQr(e){
+    async generateQr(e){
         e.preventDefault();
         if(this.validateFields()){
-            getPost(this.state.url, 
-                {
-                    "name": this.state.name,
-                    "address": this.state.address,
-                    "capacity": this.state.capacityValue
-                });
-            
-            alert("Elemento guardado");
+            const response = await getPost(this.state.url, 
+            {
+                "name": this.state.name,
+                "address": this.state.address,
+                "capacity": this.state.capacityValue
+            });
+            await this.viewQr(response);
         }
     }
+
+    viewQr = (param) => {
+        const id = Base64.encode(param);
+        this.props.history.push({
+            pathname: "/generated_qr/" + id
+        });
+    };
 
     render(){
         return(
             <div className="Form" style={{backgroundImage:"url('/img/green_background.jpg')"}}>
-                <Card className="Card" variant="outlined" style={{backgroundColor: "#baf2e9"}}>
-                    <CardContent>
-                        <form id="formCard" onSubmit={this.generateQr} autoComplete="off">
-                            <TextField className="FormInput" variant="outlined" id="nameField" label="Nombre del local" 
-                                onChange={this.handleNameInput}
-                                value={this.state.name}
-                                error={this.state.invalidName}
-                            />
-                            <p></p>
-                            <TextField className="FormInput" variant="outlined" id="addressField" label="Dirección" 
-                                onChange={this.handleAddressInput} 
-                                value={this.state.address}
-                                error={this.state.invalidAddress}
-                            />
-                            <p></p>
-                            <TextField className="FormInput" variant="outlined" id="capacityField" label="Aforo" type="number"
-                                onChange={this.handleCapacityInput}
-                                value={this.state.capacityValue}
-                                error={this.state.invalidCapacity}
-                            />
-                            <p></p>
-                            <Button variant="contained" color="primary" type="submit" id="submitButton">
-                                Generar QR
-                            </Button>
-                        </form>
-                    </CardContent>
-                </Card>
+                <Grid container spacing={0} direction="column" alignItems="center" justify="center">
+                    <Card className="Card" variant="outlined" style={{backgroundColor: "#baf2e9"}}>
+                        <CardContent>
+                            <form id="formCard" onSubmit={this.generateQr} autoComplete="off">
+                                <TextField className="FormInput" variant="outlined" id="nameField" label="Nombre del local" 
+                                    onChange={this.handleNameInput}
+                                    value={this.state.name}
+                                    error={this.state.invalidName}
+                                />
+                                <p></p>
+                                <TextField className="FormInput" variant="outlined" id="addressField" label="Dirección" 
+                                    onChange={this.handleAddressInput} 
+                                    value={this.state.address}
+                                    error={this.state.invalidAddress}
+                                />
+                                <p></p>
+                                <TextField className="FormInput" variant="outlined" id="capacityField" label="Aforo" type="number"
+                                    onChange={this.handleCapacityInput}
+                                    value={this.state.capacityValue}
+                                    error={this.state.invalidCapacity}
+                                />
+                                <p></p>
+                                <Button variant="contained" color="primary" type="submit" id="submitButton">
+                                    Generar QR
+                                </Button>
+                            </form>
+                        </CardContent>
+                    </Card>
+                </Grid>
             </div>
         );
     }
 }
 
-export default RegisterPlace;
+export default withRouter(RegisterPlace);
