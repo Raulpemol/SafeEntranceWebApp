@@ -64,16 +64,12 @@ class QRGenerator extends Component {
                 <div className="Main" style={{backgroundImage:"url('/img/green_background.jpg')"}}>
                     <Grid container spacing={0} direction="column" alignItems="center" justify="center">
                         <Card className="Card" variant="outlined" style={{backgroundColor: "#baf2e9"}}>
-                            <p>El local no es correcto</p>
+                            <p id="messageWrongPlace">El local no es correcto</p>
                             <div></div>
                             <Button variant="contained" color="primary" id="goBackButton" style={{margin: "10px"}}
                                 startIcon={<ArrowBackIcon />}
                                 onClick={this.goBack}>
                                 Volver
-                            </Button>
-                            <Button variant="contained" color="primary" id="downloadButton" style={{margin: "10px"}}
-                                startIcon={<GetAppIcon />}>
-                                Descargar
                             </Button>
                         </Card>
                         <div></div>

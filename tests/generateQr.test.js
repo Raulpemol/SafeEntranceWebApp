@@ -25,4 +25,11 @@ describe('The SafeEntrance web application', () => {
         await expect(page).toMatchElement('button[id="goBackButton"]');
         await expect(page).toMatchElement('button[id="downloadButton"]');
     });
+
+    it('should not generate a QR if the URL parameter is incorrect"', async () => {
+        await page.goto('http://localhost:3000/generated_qr/wrongplace');
+
+        await expect(page).not.toMatchElement('canvas[id="qr"]');
+        await expect(page).toMatchElement('p[id="messageWrongPlace"]');
+    });
 });
