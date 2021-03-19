@@ -23,18 +23,25 @@ class QRGenerator extends Component {
             invalid: false
         }
 
-        validatePlace();
-
+        this.validatePlace = this.validatePlace.bind(this);
         this.downloadQr = this.downloadQr.bind(this);
+
+        this.validatePlace();
     }
 
-    validatePlace(){
+    async validatePlace(){
         const response = await getOneParameterResponse(this.state.url, this.state.qrInfo);
-        if(response == null){
+        if(response == "Incorrect parameter format"){
             this.setState({
                 invalid: true
             });
         }
+        else{
+            this.setState({
+                invalid: false
+            });
+        }
+        this.render();
     }
 
     downloadQr(){
@@ -59,14 +66,13 @@ class QRGenerator extends Component {
                         <Card className="Card" variant="outlined" style={{backgroundColor: "#baf2e9"}}>
                             <p>El local no es correcto</p>
                             <div></div>
-                            <Button variant="contained" color="primary" id="submitButton" style={{margin: "10px"}}
+                            <Button variant="contained" color="primary" id="goBackButton" style={{margin: "10px"}}
                                 startIcon={<ArrowBackIcon />}
                                 onClick={this.goBack}>
                                 Volver
                             </Button>
-                            <Button variant="contained" color="primary" id="submitButton" style={{margin: "10px"}}
-                                startIcon={<GetAppIcon />}
-                                onClick={this.downloadQr}>
+                            <Button variant="contained" color="primary" id="downloadButton" style={{margin: "10px"}}
+                                startIcon={<GetAppIcon />}>
                                 Descargar
                             </Button>
                         </Card>
@@ -86,12 +92,12 @@ class QRGenerator extends Component {
                                 size={300}
                             />
                             <div></div>
-                            <Button variant="contained" color="primary" id="submitButton" style={{margin: "10px"}}
+                            <Button variant="contained" color="primary" id="goBackButton" style={{margin: "10px"}}
                                 startIcon={<ArrowBackIcon />}
                                 onClick={this.goBack}>
                                 Volver
                             </Button>
-                            <Button variant="contained" color="primary" id="submitButton" style={{margin: "10px"}}
+                            <Button variant="contained" color="primary" id="downloadButton" style={{margin: "10px"}}
                                 startIcon={<GetAppIcon />}
                                 onClick={this.downloadQr}>
                                 Descargar
