@@ -3,11 +3,11 @@ describe('The SafeEntrance web application', () => {
       await page.goto('http://localhost:3000/');
     });
 
-    it('should be titled "SafeEntrance"', async () => {
+    it('should be titled "SafeEntrance', async () => {
       await expect(page.title()).resolves.toMatch('SafeEntrance');
     });
 
-    it('should have a header "Bienvenido a SafeEntrance"', async () => {
+    it('should have a header "Bienvenido a SafeEntrance', async () => {
         await expect(page).toMatchElement('h1[id="title"]');
     });
 
@@ -21,7 +21,7 @@ describe('The SafeEntrance web application', () => {
   });
 
 describe('The form fields', () => {
-    it('should be marked as invalid when empty"', async () => {
+    it('should be marked as invalid when empty', async () => {
         await expect(page).toClick('button', { id: 'submitButton' })
         await expect(page).toMatchElement('input[id="nameField"][aria-invalid="true"]');
         await expect(page).toMatchElement('input[id="addressField"][aria-invalid="true"]');
@@ -34,7 +34,7 @@ describe('The input field for the name', () => {
       await page.goto('http://localhost:3000/');
     });
 
-    it('should not be marked as invalid when filled"', async () => {
+    it('should not be marked as invalid when filled', async () => {
       await expect(page).toFill(
         'input[id="nameField"]',
         "Local de Prueba"
@@ -51,7 +51,7 @@ describe('The input field for the address', () => {
       await page.goto('http://localhost:3000/');
     });
 
-    it('should not be marked as invalid when filled"', async () => {
+    it('should not be marked as invalid when filled', async () => {
       await expect(page).toFill(
         'input[id="addressField"]',
         "c/Dirección de prueba, Nº8"
@@ -68,7 +68,7 @@ describe('The input field for the capacity', () => {
     await page.goto('http://localhost:3000/');
   });
 
-  it('should not be marked as invalid when filled"', async () => {
+  it('should not be marked as invalid when filled', async () => {
     await expect(page).toFill(
       'input[id="capacityField"]',
       "1"
@@ -85,7 +85,7 @@ describe('Duplicated places', () => {
     await page.goto('http://localhost:3000/');
   });
 
-  it('should not be registered"', async () => {
+  it('should not be registered', async () => {
     await expect(page).toFill(
       'input[id="nameField"]',
       "Local de Prueba"
