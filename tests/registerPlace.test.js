@@ -79,3 +79,28 @@ describe('The input field for the capacity', () => {
     await expect(page).toMatchElement('input[id="capacityField"][aria-invalid="false"]');
   });
 });
+
+describe('Duplicated places', () => {
+  beforeAll(async () => {
+    await page.goto('http://localhost:3000/');
+  });
+
+  it('should not be registered"', async () => {
+    await expect(page).toFill(
+      'input[id="nameField"]',
+      "Local de Prueba"
+    );
+    await expect(page).toFill(
+      'input[id="addressField"]',
+      "c/Dirección de prueba, Nº8"
+    );
+    await expect(page).toFill(
+      'input[id="capacityField"]',
+      "1"
+    );
+    await expect(page).toClick('button', { id: 'submitButton' });
+    await expect(page).toMatchElement('input[id="nameField"][aria-invalid="false"]');
+    await expect(page).toMatchElement('input[id="addressField"][aria-invalid="true"]');
+    await expect(page).toMatchElement('input[id="capacityField"][aria-invalid="false"]');
+  });
+});

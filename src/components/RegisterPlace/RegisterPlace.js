@@ -99,7 +99,6 @@ class RegisterPlace extends Component {
             if(response.status == 400){
                 this.setState({
                     error: true,
-                    invalidName: true,
                     invalidAddress: true
                 });
             }
@@ -154,7 +153,7 @@ class RegisterPlace extends Component {
                             <Snackbar open={this.state.error} autoHideDuration={5000} onClose={this.handleAlertClose}
                                 anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}>
                                 <Alert severity="error" onClose={this.handleAlertClose}>
-                                    Este local ya ha sido registrado previamente
+                                    Ya ha sido registrado previamente un local en esa dirección
                                 </Alert>
                             </Snackbar>
                         </CardContent>
