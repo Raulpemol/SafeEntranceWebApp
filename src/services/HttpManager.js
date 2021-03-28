@@ -15,7 +15,7 @@ export async function getPost(url = '', bodyData = {}){
         body: JSON.stringify(bodyData)
     });
 
-    return response.json();
+    return response;
 }
 
 export async function getOneParameterResponse(url = '', bodyData = ''){

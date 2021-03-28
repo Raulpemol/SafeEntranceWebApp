@@ -25,23 +25,20 @@ class QRGenerator extends Component {
 
         this.validatePlace = this.validatePlace.bind(this);
         this.downloadQr = this.downloadQr.bind(this);
-
-        this.validatePlace();
     }
 
     async validatePlace(){
         const response = await getOneParameterResponse(this.state.url, this.state.qrInfo);
         if(response == "Incorrect parameter format"){
-            this.setState({
+            await this.setState({
                 invalid: true
             });
         }
         else{
-            this.setState({
+            await this.setState({
                 invalid: false
             });
         }
-        this.render();
     }
 
     downloadQr(){
@@ -59,6 +56,8 @@ class QRGenerator extends Component {
     };
 
     render(){
+        this.validatePlace();
+
         if(this.state.invalid){
             return(
                 <div className="Main" style={{backgroundImage:"url('/img/green_background.jpg')"}}>

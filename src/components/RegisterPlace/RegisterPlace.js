@@ -8,6 +8,8 @@ import { getPost } from '../../services/HttpManager';
 import Grid from '@material-ui/core/Grid';
 import { withRouter } from 'react-router-dom';
 import { Base64 } from "js-base64";
+import Snackbar from '@material-ui/core/Snackbar';
+import Alert from '@material-ui/lab/Alert';
 
 class RegisterPlace extends Component {
     constructor(props){
@@ -20,13 +22,15 @@ class RegisterPlace extends Component {
             address: '',
             invalidAddress: false,
             capacityValue: '',
-            invalidCapacity: false
+            invalidCapacity: false,
+            error: false
         };
 
         this.handleNameInput = this.handleNameInput.bind(this);
         this.handleAddressInput = this.handleAddressInput.bind(this);
         this.handleCapacityInput = this.handleCapacityInput.bind(this);
         this.generateQr = this.generateQr.bind(this);
+        this.handleAlertClose = this.handleAlertClose.bind(this);
     }
 
     handleNameInput(e){
@@ -91,8 +95,24 @@ class RegisterPlace extends Component {
                 "address": this.state.address,
                 "capacity": this.state.capacityValue
             });
-            await this.viewQr(response);
+            const msg = await response.json();
+            if(response.status == 400){
+                this.setState({
+                    error: true,
+                    invalidName: true,
+                    invalidAddress: true
+                });
+            }
+            else{
+                await this.viewQr(msg);
+            }
         }
+    }
+
+    handleAlertClose(){
+        this.setState({
+            error: false
+        });
     }
 
     viewQr = (param) => {
@@ -131,6 +151,12 @@ class RegisterPlace extends Component {
                                     Generar QR
                                 </Button>
                             </form>
+                            <Snackbar open={this.state.error} autoHideDuration={5000} onClose={this.handleAlertClose}
+                                anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}>
+                                <Alert severity="error" onClose={this.handleAlertClose}>
+                                    Este local ya ha sido registrado previamente
+                                </Alert>
+                            </Snackbar>
                         </CardContent>
                     </Card>
                 </Grid>
