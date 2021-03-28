@@ -6,13 +6,15 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { getPost } from '../../services/HttpManager';
 import Grid from '@material-ui/core/Grid';
+import { withRouter } from 'react-router-dom';
+import { Base64 } from "js-base64";
 
 class RegisterPlace extends Component {
     constructor(props){
         super(props);
 
         this.state = {
-            url: 'api/addPlace',
+            url: 'https://registrolocales-api.azurewebsites.net/api/places/addPlace',
             name: '',
             invalidName: false,
             address: '',
@@ -80,19 +82,25 @@ class RegisterPlace extends Component {
         return isValid;
     }
 
-    generateQr(e){
+    async generateQr(e){
         e.preventDefault();
         if(this.validateFields()){
-            getPost(this.state.url, 
-                {
-                    "name": this.state.name,
-                    "address": this.state.address,
-                    "capacity": this.state.capacityValue
-                });
-            
-            alert("Elemento guardado");
+            const response = await getPost(this.state.url, 
+            {
+                "name": this.state.name,
+                "address": this.state.address,
+                "capacity": this.state.capacityValue
+            });
+            await this.viewQr(response);
         }
     }
+
+    viewQr = (param) => {
+        const id = Base64.encode(param);
+        this.props.history.push({
+            pathname: "/generated_qr/" + id
+        });
+    };
 
     render(){
         return(
@@ -131,4 +139,4 @@ class RegisterPlace extends Component {
     }
 }
 
-export default RegisterPlace;
+export default withRouter(RegisterPlace);
