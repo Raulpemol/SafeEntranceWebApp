@@ -91,16 +91,19 @@ describe('Duplicated places', () => {
       "Local de Prueba"
     );
     await expect(page).toFill(
-      'input[id="addressField"]',
-      "c/Dirección de prueba, Nº8"
+        'input[id="addressField"]',
+        "c/Dirección de prueba, Nº8"
     );
     await expect(page).toFill(
-      'input[id="capacityField"]',
-      "1"
+        'input[id="capacityField"]',
+        "1"
     );
     await expect(page).toClick('button', { id: 'submitButton' });
     await expect(page).toMatchElement('input[id="nameField"][aria-invalid="false"]');
     await expect(page).toMatchElement('input[id="addressField"][aria-invalid="true"]');
     await expect(page).toMatchElement('input[id="capacityField"][aria-invalid="false"]');
+  });
+  it('a warning should be shown', async () => {
+    await expect(page).toMatchElement('div[id="duplicatedPlaceAlert"]');
   });
 });

@@ -150,7 +150,7 @@ class RegisterPlace extends Component {
                                     Generar QR
                                 </Button>
                             </form>
-                            <Snackbar open={this.state.error} autoHideDuration={5000} onClose={this.handleAlertClose}
+                            <Snackbar id="duplicatedPlaceAlert" open={this.state.error} autoHideDuration={5000} onClose={this.handleAlertClose}
                                 anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}>
                                 <Alert severity="error" onClose={this.handleAlertClose}>
                                     Ya ha sido registrado previamente un local en esa dirección

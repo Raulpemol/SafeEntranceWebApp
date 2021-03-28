@@ -10,7 +10,7 @@ describe('The SafeEntrance web application', () => {
         );
         await expect(page).toFill(
             'input[id="addressField"]',
-            "c/Dirección de prueba, Nº8"
+            "c/Dirección de prueba, Nº8"+Math.random()
         );
         await expect(page).toFill(
             'input[id="capacityField"]',
