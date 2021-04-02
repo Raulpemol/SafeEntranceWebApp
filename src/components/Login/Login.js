@@ -75,13 +75,6 @@ class RegisterPlace extends Component {
         });
     }
 
-    viewQr = (param) => {
-        const id = Base64.encode(param);
-        this.props.history.push({
-            pathname: "/generated_qr/" + id
-        });
-    };
-
     render(){
         return(
             <div className="Form" style={{backgroundImage:"url('/img/green_background.jpg')"}}>

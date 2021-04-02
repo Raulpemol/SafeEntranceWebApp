@@ -16,15 +16,16 @@ class RegisterPlace extends Component {
         super(props);
 
         this.state = {
-            url: 'https://registrolocales-api.azurewebsites.net/admin',
+            daysBeforePcrUrl: 'https://registrolocales-api.azurewebsites.net/env/setidbp',
             error: false,
             token: props.location.token,
             daysBeforePcr: 2,
-            invalidDaysBeforePcr: false
+            invalidDaysBeforePcr: false,
+            message: false
         };
 
         this.handleDaysBeforePcr = this.handleDaysBeforePcr.bind(this);
-        this.login = this.login.bind(this);
+        this.setDaysBeforePcr = this.setDaysBeforePcr.bind(this);
         this.handleAlertClose = this.handleAlertClose.bind(this);
     }
 
@@ -37,36 +38,33 @@ class RegisterPlace extends Component {
         });
     }
 
-    async login(e){
+    async setDaysBeforePcr(e){
         e.preventDefault();
-        const response = await getPost(this.state.url, 
+        const response = await getPost(this.state.daysBeforePcrUrl, 
         {
-            "username": this.state.username,
-            "password": this.state.password
+            "token": this.state.token,
+            "value": this.state.daysBeforePcr
         });
             
-        if(response.status != 200){
+        if(response.status != 201){
             this.setState({
                 error: true,
                 password: ''
             });
         }
         else{
+            this.setState({
+                message: true
+            });
         }
     }
 
     handleAlertClose(){
         this.setState({
-            error: false
+            error: false,
+            message: false
         });
     }
-
-    viewQr = (param) => {
-        const id = Base64.encode(param);
-        this.props.history.push({
-            pathname: "/generated_qr/" + id
-        });
-    };
 
     render(){
         if(this.state.token == "" || this.state.token == null || this.state.token == undefined){
@@ -88,13 +86,20 @@ class RegisterPlace extends Component {
                             value={this.state.daysBeforePcr}
                             error={this.state.invalidDaysBeforePcr}
                         />
-                        <Button variant="contained" color="primary" type="submit" id="submitButton">
+                        <Button variant="contained" color="primary" type="submit" id="submitButton" style={{verticalAlign: "bottom"}}
+                            onClick={this.setDaysBeforePcr}>
                             Guardar
                         </Button>
                         <Snackbar id="errorAlert" open={this.state.error} autoHideDuration={5000} onClose={this.handleAlertClose}
                             anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}>
                             <Alert severity="error" onClose={this.handleAlertClose}>
                                 Credenciales incorrectas
+                            </Alert>
+                        </Snackbar>
+                        <Snackbar id="messageAlert" open={this.state.message} autoHideDuration={5000} onClose={this.handleAlertClose}
+                            anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}>
+                            <Alert severity="success" onClose={this.handleAlertClose}>
+                                Se ha actualizado el valor correctamente
                             </Alert>
                         </Snackbar>
                     </CardContent>
