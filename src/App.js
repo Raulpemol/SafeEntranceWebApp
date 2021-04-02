@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 import RegisterPlace from './components/RegisterPlace/RegisterPlace';
 import QRGenerator from './components/QRGenerator/QRGenerator';
+import Login from './components/Login/Login';
 
 function App() {
   return (
@@ -23,6 +24,9 @@ function App() {
               </Route>
               <Route path="/generated_qr/:id">
                 <QRGenerator />
+              </Route>
+              <Route path="/login">
+                <Login />
               </Route>
               <Redirect to="/404" />
             </Switch>

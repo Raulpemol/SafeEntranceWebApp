@@ -1,0 +1,21 @@
+.Form{
+    display: flex;
+    height: 85vh;
+    background-repeat: no-repeat;
+    background-size: cover;
+    align-content: center;
+}
+
+.Card{
+    align-content: initial;
+    width: 50%;
+}
+
+.FormInput{
+    align-content: center;
+    width: 50%;
+    min-width: 1300px;
+}
+h2{
+    color: #1c1d21;
+}
