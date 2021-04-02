@@ -8,6 +8,7 @@ import {
 import RegisterPlace from './components/RegisterPlace/RegisterPlace';
 import QRGenerator from './components/QRGenerator/QRGenerator';
 import Login from './components/Login/Login';
+import AdminPanel from './components/AdminPanel/AdminPanel';
 
 function App() {
   return (
@@ -27,6 +28,9 @@ function App() {
               </Route>
               <Route path="/login">
                 <Login />
+              </Route>
+              <Route path="/panel">
+                <AdminPanel />
               </Route>
               <Redirect to="/404" />
             </Switch>

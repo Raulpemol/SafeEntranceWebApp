@@ -59,6 +59,13 @@ class RegisterPlace extends Component {
             });
         }
         else{
+            const body = await response.json();
+            const token = body["token"];
+            
+            this.props.history.push({
+                pathname: "/panel",
+                token: token
+            });
         }
     }
 
