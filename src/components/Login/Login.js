@@ -18,6 +18,7 @@ class RegisterPlace extends Component {
         this.state = {
             url: 'https://registrolocales-api.azurewebsites.net/admin',
             error: false,
+            errorField: false,
             username: '',
             password: ''
         };
@@ -32,7 +33,7 @@ class RegisterPlace extends Component {
         const input = e.target.value;
         this.setState({
             username: input,
-            invalidName: false
+            errorField: false
         });
     }
 
@@ -40,7 +41,7 @@ class RegisterPlace extends Component {
         const input = e.target.value;
         this.setState({
             password: input,
-            invalidAddress: false
+            errorField: false
         });
     }
 
@@ -55,6 +56,7 @@ class RegisterPlace extends Component {
         if(response.status != 200){
             this.setState({
                 error: true,
+                errorField: true,
                 password: ''
             });
         }
@@ -88,7 +90,7 @@ class RegisterPlace extends Component {
                                 <TextField className="FormInput" variant="outlined" id="usernameField" label="Nombre de usuario" 
                                     onChange={this.handleUsernameInput}
                                     value={this.state.username}
-                                    error={this.state.error}
+                                    error={this.state.errorField}
                                 />
                                 <p></p>
                                 <TextField className="FormInput" variant="outlined" id="passwordField" label="Contraseña" 
@@ -96,7 +98,7 @@ class RegisterPlace extends Component {
                                     value={this.state.password}
                                     type="password"
                                     autoComplete="current-password"
-                                    error={this.state.error}
+                                    error={this.state.errorField}
                                 />
                                 <p></p>
                                 <Button variant="contained" color="primary" type="submit" id="submitButton">

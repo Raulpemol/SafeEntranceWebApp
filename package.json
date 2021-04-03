@@ -22,7 +22,7 @@
   },
   "jest": {
     "preset": "jest-puppeteer",
-    "testTimeout": 80000,
+    "testTimeout": 10000,
     "testRegex": "./tests/*"
   },
   "scripts": {

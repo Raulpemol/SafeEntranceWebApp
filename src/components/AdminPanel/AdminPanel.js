@@ -79,14 +79,14 @@ class RegisterPlace extends Component {
             <Grid container spacing={0} direction="column" alignItems="center" justify="center">
                 <Card className="Panel" variant="outlined" style={{backgroundColor: "#baf2e9"}}>
                     
-                <h2>Variables de entorno</h2>
+                <h2 id="subtitlePanel">Variables de entorno</h2>
                     <CardContent>
-                        <TextField className="InputVar" variant="filled" id="usernameField" type="number" label="Periodo de contagio previo a prueba" 
+                        <TextField className="InputVar" variant="filled" id="idbpField" type="number" label="Periodo de contagio previo a prueba" 
                             onChange={this.handleDaysBeforePcr}
                             value={this.state.daysBeforePcr}
                             error={this.state.invalidDaysBeforePcr}
                         />
-                        <Button variant="contained" color="primary" type="submit" id="submitButton" style={{verticalAlign: "bottom"}}
+                        <Button variant="contained" color="primary" type="submit" id="saveIdbp" style={{verticalAlign: "bottom"}}
                             onClick={this.setDaysBeforePcr}>
                             Guardar
                         </Button>
