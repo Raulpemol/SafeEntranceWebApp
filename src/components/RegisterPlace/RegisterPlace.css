@@ -6,13 +6,7 @@
     align-content: center;
 }
 
-.Card{
+#CardRegister{
     align-content: initial;
-    width: 50%;
-}
-
-.FormInput{
-    align-content: center;
-    width: 50%;
-    min-width: 1300px;
+    padding: 20px;
 }

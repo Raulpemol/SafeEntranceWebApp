@@ -125,22 +125,22 @@ class RegisterPlace extends Component {
         return(
             <div className="Form" style={{backgroundImage:"url('/img/green_background.jpg')"}}>
                 <Grid container spacing={0} direction="column" alignItems="center" justify="center">
-                    <Card className="Card" variant="outlined" style={{backgroundColor: "#baf2e9"}}>
+                    <Card id="CardRegister" variant="outlined" style={{backgroundColor: "#baf2e9"}}>
                         <CardContent>
                             <form id="formCard" onSubmit={this.generateQr} autoComplete="off">
-                                <TextField className="FormInput" variant="outlined" id="nameField" label="Nombre del local" 
+                                <TextField variant="outlined" id="nameField" label="Nombre del local" 
                                     onChange={this.handleNameInput}
                                     value={this.state.name}
                                     error={this.state.invalidName}
                                 />
                                 <p></p>
-                                <TextField className="FormInput" variant="outlined" id="addressField" label="Dirección" 
+                                <TextField variant="outlined" id="addressField" label="Dirección" 
                                     onChange={this.handleAddressInput} 
                                     value={this.state.address}
                                     error={this.state.invalidAddress}
                                 />
                                 <p></p>
-                                <TextField className="FormInput" variant="outlined" id="capacityField" label="Aforo" type="number"
+                                <TextField variant="outlined" id="capacityField" label="Aforo" type="number"
                                     onChange={this.handleCapacityInput}
                                     value={this.state.capacityValue}
                                     error={this.state.invalidCapacity}

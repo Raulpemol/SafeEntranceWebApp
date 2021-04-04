@@ -62,7 +62,7 @@ class QRGenerator extends Component {
             return(
                 <div className="Main" style={{backgroundImage:"url('/img/green_background.jpg')"}}>
                     <Grid container spacing={0} direction="column" alignItems="center" justify="center">
-                        <Card className="Card" variant="outlined" style={{backgroundColor: "#baf2e9"}}>
+                        <Card id="CardQr" variant="outlined" style={{backgroundColor: "#baf2e9"}}>
                             <p id="messageWrongPlace">El local no es correcto</p>
                             <div></div>
                             <Button variant="contained" color="primary" id="goBackButton" style={{margin: "10px"}}
@@ -80,11 +80,12 @@ class QRGenerator extends Component {
             return(
                 <div className="Main" style={{backgroundImage:"url('/img/green_background.jpg')"}}>
                     <Grid container spacing={0} direction="column" alignItems="center" justify="center">
-                        <Card className="Card" variant="outlined" style={{backgroundColor: "#baf2e9"}}>
+                        <Card id="CardQr" variant="outlined" style={{backgroundColor: "#baf2e9"}}>
                             <QRcode 
                                 id="qr"
                                 value={this.state.qrInfo} 
                                 size={300}
+                                style={{margin: "10px"}}
                             />
                             <div></div>
                             <Button variant="contained" color="primary" id="goBackButton" style={{margin: "10px"}}

@@ -81,7 +81,7 @@ class RegisterPlace extends Component {
         return(
             <div className="Form" style={{backgroundImage:"url('/img/green_background.jpg')"}}>
                 <Grid container spacing={0} direction="column" alignItems="center" justify="center">
-                    <Card className="Card" variant="outlined" style={{backgroundColor: "#baf2e9"}}>
+                    <Card id="CardLogin" variant="outlined" style={{backgroundColor: "#baf2e9", paddingLeft: "50px", paddingRight: "50px"}}>
                         
                     <h2>Panel de administración</h2>
                         <CardContent>
