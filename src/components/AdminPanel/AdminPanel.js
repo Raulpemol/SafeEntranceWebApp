@@ -17,16 +17,21 @@ class RegisterPlace extends Component {
 
         this.state = {
             daysBeforePcrUrl: 'https://registrolocales-api.azurewebsites.net/env/setidbp',
+            daysBeforeSymptomsUrl: 'https://registrolocales-api.azurewebsites.net/env/setdapi',
             error: false,
             token: props.location.token,
             daysBeforePcr: 2,
             invalidDaysBeforePcr: false,
+            daysBeforeSymptoms: 7,
+            invalidDaysBeforeSymptoms: false,
             message: false
         };
 
         this.handleDaysBeforePcr = this.handleDaysBeforePcr.bind(this);
         this.setDaysBeforePcr = this.setDaysBeforePcr.bind(this);
         this.handleAlertClose = this.handleAlertClose.bind(this);
+        this.handleDaysBeforeSymptoms = this.handleDaysBeforeSymptoms.bind(this);
+        this.setDaysBeforeSymptoms = this.setDaysBeforeSymptoms.bind(this);
     }
 
     handleDaysBeforePcr(e) {
@@ -34,7 +39,7 @@ class RegisterPlace extends Component {
         const numbers = input.replace(/[^0-9]/, '');
         this.setState({
             daysBeforePcr: numbers,
-            invalidCapacity: false
+            invalidDaysBeforePcr: false
         });
     }
 
@@ -48,8 +53,36 @@ class RegisterPlace extends Component {
             
         if(response.status != 201){
             this.setState({
-                error: true,
-                password: ''
+                error: true
+            });
+        }
+        else{
+            this.setState({
+                message: true
+            });
+        }
+    }
+
+    handleDaysBeforeSymptoms(e) {
+        const input = e.target.value;
+        const numbers = input.replace(/[^0-9]/, '');
+        this.setState({
+            daysBeforeSymptoms: numbers,
+            invalidDaysBeforeSymptoms: false
+        });
+    }
+
+    async setDaysBeforeSymptoms(e){
+        e.preventDefault();
+        const response = await getPost(this.state.daysBeforeSymptomsUrl, 
+        {
+            "token": this.state.token,
+            "value": this.state.daysBeforeSymptoms
+        });
+            
+        if(response.status != 201){
+            this.setState({
+                error: true
             });
         }
         else{
@@ -88,6 +121,15 @@ class RegisterPlace extends Component {
                         />
                         <Button variant="contained" color="primary" type="submit" id="saveIdbp" style={{verticalAlign: "bottom"}}
                             onClick={this.setDaysBeforePcr}>
+                            Guardar
+                        </Button>
+                        <TextField className="InputVar" variant="filled" id="dapiField" type="number" label="Periodo de aparición de síntomas" 
+                            onChange={this.handleDaysBeforeSymptoms}
+                            value={this.state.daysBeforeSymptoms}
+                            error={this.state.invalidDaysBeforeSymptoms}
+                        />
+                        <Button variant="contained" color="primary" type="submit" id="saveDapi" style={{verticalAlign: "bottom"}}
+                            onClick={this.setDaysBeforeSymptoms}>
                             Guardar
                         </Button>
                         <Snackbar id="errorAlert" open={this.state.error} autoHideDuration={5000} onClose={this.handleAlertClose}
