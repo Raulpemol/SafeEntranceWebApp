@@ -146,7 +146,7 @@ class RegisterPlace extends Component {
             <Grid container spacing={0} direction="column" alignItems="center" justify="center">
                 <Card className="Panel" variant="outlined" style={{backgroundColor: "#baf2e9"}}>
                     
-                <h2 id="subtitlePanel">Variables de entorno</h2>
+                    <h2 id="subtitlePanel">Variables de entorno</h2>
                     <CardContent>
                         <TextField className="InputVar" variant="filled" id="idbpField" type="number" label="Periodo de contagio previo a prueba" 
                             onChange={this.handleDaysBeforePcr}
