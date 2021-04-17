@@ -56,7 +56,7 @@ class SearchPlace extends Component {
         e.preventDefault();
         if(this.validateFields()){
             const response = await getOneParameterResponse(this.state.url, this.state.name);
-            if(response.status == 400){
+            if(response.status == 400 || response.length < 1){
                 this.setState({
                     error: true,
                     invalidAddress: true
@@ -101,10 +101,10 @@ class SearchPlace extends Component {
                                     })
                                 }
                             </div>
-                            <Snackbar id="duplicatedPlaceAlert" open={this.state.error} autoHideDuration={5000} onClose={this.handleAlertClose}
+                            <Snackbar id="notExistsAlert" open={this.state.error} autoHideDuration={5000} onClose={this.handleAlertClose}
                                 anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}>
                                 <Alert severity="error" onClose={this.handleAlertClose}>
-                                    Ya ha sido registrado previamente un local en esa dirección
+                                    No se ha encontrado ningún local con ese nombre
                                 </Alert>
                             </Snackbar>
                         </CardContent>
