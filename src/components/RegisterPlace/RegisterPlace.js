@@ -126,6 +126,7 @@ class RegisterPlace extends Component {
             <div className="Form" style={{backgroundImage:"url('/img/green_background.jpg')"}}>
                 <Grid container spacing={0} direction="column" alignItems="center" justify="center">
                     <Card id="CardRegister" variant="outlined" style={{backgroundColor: "#baf2e9"}}>
+                        <h2 id="subtitleRegister">Registrar un nuevo local</h2>
                         <CardContent>
                             <form id="formCard" onSubmit={this.generateQr} autoComplete="off">
                                 <TextField variant="outlined" id="nameField" label="Nombre del local" 
