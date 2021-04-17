@@ -1,0 +1,20 @@
+.FormSearch{
+    display: flex;
+    height: 85vh;
+    background-repeat: no-repeat;
+    background-size: cover;
+    align-content: center;
+}
+
+#CardSearch::-webkit-scrollbar {
+    display: none;
+}
+
+#CardSearch{
+    align-content: initial;
+    padding: 20px;
+    width: 80%;
+    height: 80%;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}

@@ -9,6 +9,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import RegisterPlace from './components/RegisterPlace/RegisterPlace';
+import SearchPlace from './components/SearchPlace/SearchPlace';
 import QRGenerator from './components/QRGenerator/QRGenerator';
 import Login from './components/Login/Login';
 import AdminPanel from './components/AdminPanel/AdminPanel';
@@ -85,6 +86,7 @@ function App() {
                   <RegisterPlace />
                 </TabPanel>
                 <TabPanel value={value} index={1}>
+                  <SearchPlace />
                 </TabPanel>
               </Route>
               <Route path="/generated_qr/:id">
