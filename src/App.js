@@ -78,8 +78,8 @@ function App() {
               <Route exact path="/">
                 <AppBar position="relative">
                   <Tabs value={value} onChange={handleChange} centered indicatorColor="primary" textColor="primary" className={useStyles().tabBar}>
-                    <Tab label="Registrar local" icon={<CreateIcon/>}{...a11yProps(0)}/>
-                    <Tab label="Buscar local" icon={<SearchIcon/>} {...a11yProps(1)}/>
+                    <Tab label="Registrar local" icon={<CreateIcon/>}{...a11yProps(0)} id="registerNavButton"/>
+                    <Tab label="Buscar local" icon={<SearchIcon/>} {...a11yProps(1)} id="searchNavButton"/>
                   </Tabs>
                 </AppBar>
                 <TabPanel value={value} index={0}>

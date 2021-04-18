@@ -123,7 +123,7 @@ class RegisterPlace extends Component {
 
     render(){
         return(
-            <div className="Form" style={{backgroundImage:"url('/img/green_background.jpg')"}}>
+            <div className="FormRegister" style={{backgroundImage:"url('/img/green_background.jpg')"}}>
                 <Grid container spacing={0} direction="column" alignItems="center" justify="center">
                     <Card id="CardRegister" variant="outlined" style={{backgroundColor: "#baf2e9"}}>
                         <h2 id="subtitleRegister">Registrar un nuevo local</h2>

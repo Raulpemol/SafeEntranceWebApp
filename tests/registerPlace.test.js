@@ -11,6 +11,10 @@ describe('The SafeEntrance web application', () => {
         await expect(page).toMatchElement('h1[id="title"]');
     });
 
+    it('should have a button to go to the register places page', async () => {
+      await expect(page).toMatchElement('button[id="registerNavButton"]');
+    });
+
     it('should have a form with three inputs and a button', async () => {
         await expect(page).toMatchElement('form[id="formCard"]');
         await expect(page).toMatchElement('input[id="nameField"]');

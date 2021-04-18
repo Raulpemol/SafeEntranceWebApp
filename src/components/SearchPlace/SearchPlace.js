@@ -82,10 +82,10 @@ class SearchPlace extends Component {
             <div className="FormSearch" style={{backgroundImage:"url('/img/green_background.jpg')"}}>
                 <Grid container spacing={0} direction="column" alignItems="center" justify="center">
                     <Card id="CardSearch" variant="outlined" style={{backgroundColor: "#baf2e9", overflow: "scroll"}}>
-                        <h2 id="subtitleRegister">Buscar un local en el sistema</h2>
+                        <h2 id="subtitleSearch">Buscar un local en el sistema</h2>
                         <CardContent>
                             <form id="formCard" onSubmit={this.generateQr} autoComplete="off">
-                                <TextField variant="standard" id="nameField" label="Nombre del local" 
+                                <TextField variant="standard" id="searchField" label="Nombre del local" 
                                     onChange={this.handleNameInput}
                                     value={this.state.name}
                                     error={this.state.invalidName}
