@@ -145,36 +145,43 @@ class RegisterPlace extends Component {
             <div className="Form" style={{backgroundImage:"url('/img/green_background.jpg')"}}>
             <Grid container spacing={0} direction="column" alignItems="center" justify="center">
                 <Card className="Panel" variant="outlined" style={{backgroundColor: "#baf2e9"}}>
-                    
                     <h2 id="subtitlePanel">Variables de entorno</h2>
                     <CardContent>
-                        <TextField className="InputVar" variant="filled" id="idbpField" type="number" label="Periodo de contagio previo a prueba" 
-                            onChange={this.handleDaysBeforePcr}
-                            value={this.state.daysBeforePcr}
-                            error={this.state.invalidDaysBeforePcr}
-                        />
-                        <Button variant="contained" color="primary" type="submit" id="saveIdbp" style={{verticalAlign: "bottom"}}
-                            onClick={this.setDaysBeforePcr}>
-                            Guardar
-                        </Button>
-                        <TextField className="InputVar" variant="filled" id="dapiField" type="number" label="Periodo de aparición de síntomas" 
-                            onChange={this.handleDaysBeforeSymptoms}
-                            value={this.state.daysBeforeSymptoms}
-                            error={this.state.invalidDaysBeforeSymptoms}
-                        />
-                        <Button variant="contained" color="primary" type="submit" id="saveDapi" style={{verticalAlign: "bottom"}}
-                            onClick={this.setDaysBeforeSymptoms}>
-                            Guardar
-                        </Button>
-                        <TextField className="InputVar" variant="filled" id="mfdcField" type="number" label="Minutos de contacto para ser estrecho" 
-                            onChange={this.handleMinutesForContact}
-                            value={this.state.minutesForContact}
-                            error={this.state.invalidMinutesForContact}
-                        />
-                        <Button variant="contained" color="primary" type="submit" id="saveMfdc" style={{verticalAlign: "bottom"}}
-                            onClick={this.setMinutesForContact}>
-                            Guardar
-                        </Button>
+                        <Grid container spacing={2} style={{justifyContent: "center", alignItems: "center"}}>
+                        <Grid item xs={12} sm={4}>
+                            <TextField className="InputVar" variant="filled" id="idbpField" type="number" label="Periodo de contagio previo a prueba" 
+                                onChange={this.handleDaysBeforePcr}
+                                value={this.state.daysBeforePcr}
+                                error={this.state.invalidDaysBeforePcr}
+                            />
+                            <Button variant="contained" color="primary" type="submit" id="saveIdbp" style={{verticalAlign: "bottom", margin: "5px"}}
+                                onClick={this.setDaysBeforePcr}>
+                                Guardar
+                            </Button>
+                            </Grid>
+                            <Grid item xs={12} sm={4}>
+                            <TextField className="InputVar" variant="filled" id="dapiField" type="number" label="Periodo de aparición de síntomas" 
+                                onChange={this.handleDaysBeforeSymptoms}
+                                value={this.state.daysBeforeSymptoms}
+                                error={this.state.invalidDaysBeforeSymptoms}
+                            />
+                            <Button variant="contained" color="primary" type="submit" id="saveDapi" style={{verticalAlign: "bottom", margin: "5px"}}
+                                onClick={this.setDaysBeforeSymptoms}>
+                                Guardar
+                            </Button>
+                            </Grid>
+                            <Grid item xs={12} sm={4}>
+                            <TextField className="InputVar" variant="filled" id="mfdcField" type="number" label="Minutos de contacto para ser estrecho" 
+                                onChange={this.handleMinutesForContact}
+                                value={this.state.minutesForContact}
+                                error={this.state.invalidMinutesForContact}
+                            />
+                            <Button variant="contained" color="primary" type="submit" id="saveMfdc" style={{verticalAlign: "bottom", margin: "5px"}}
+                                onClick={this.setMinutesForContact}>
+                                Guardar
+                            </Button>
+                            </Grid>
+                        </Grid>
                         <Snackbar id="errorAlert" open={this.state.error} autoHideDuration={5000} onClose={this.handleAlertClose}
                             anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}>
                             <Alert severity="error" onClose={this.handleAlertClose}>
