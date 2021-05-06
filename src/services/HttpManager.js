@@ -18,8 +18,8 @@ export async function getPost(url = '', bodyData = {}){
     return response;
 }
 
-export async function getOneParameterResponse(url = '', bodyData = ''){
-    const response = await fetch(url + '/' + bodyData.replace(" ", "%20").replace("&","%26"), {
+export async function getOneParameterResponse(url = '', data = ''){
+    const response = await fetch(url + '/' + data.replace(" ", "%20").replace("&","%26"), {
         method: 'GET',
         mode: 'cors',
         cache: 'no-cache',

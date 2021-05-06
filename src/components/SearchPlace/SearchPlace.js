@@ -26,7 +26,7 @@ class SearchPlace extends Component {
         };
 
         this.handleNameInput = this.handleNameInput.bind(this);
-        this.generateQr = this.generateQr.bind(this);
+        this.getPlaces = this.getPlaces.bind(this);
         this.handleAlertClose = this.handleAlertClose.bind(this);
     }
 
@@ -52,7 +52,7 @@ class SearchPlace extends Component {
         return isValid;
     }
 
-    async generateQr(e){
+    async getPlaces(e){
         e.preventDefault();
         if(this.validateFields()){
             const response = await getOneParameterResponse(this.state.url, this.state.name);
@@ -84,7 +84,7 @@ class SearchPlace extends Component {
                     <Card id="CardSearch" variant="outlined" style={{backgroundColor: "#baf2e9", overflow: "scroll"}}>
                         <h2 id="subtitleSearch">Buscar un local en el sistema</h2>
                         <CardContent>
-                            <form id="formCard" onSubmit={this.generateQr} autoComplete="off">
+                            <form id="formCard" onSubmit={this.getPlaces} autoComplete="off">
                                 <TextField variant="standard" id="searchField" label="Nombre del local" 
                                     onChange={this.handleNameInput}
                                     value={this.state.name}

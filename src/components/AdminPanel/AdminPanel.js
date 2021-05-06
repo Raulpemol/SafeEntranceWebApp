@@ -4,132 +4,45 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import { getPost } from '../../services/HttpManager';
+import { getOneParameterResponse, getPost } from '../../services/HttpManager';
 import Grid from '@material-ui/core/Grid';
 import { withRouter } from 'react-router-dom';
 import { Base64 } from "js-base64";
 import Snackbar from '@material-ui/core/Snackbar';
 import Alert from '@material-ui/lab/Alert';
+import VariableComponent from '../VariableComponent/VariableComponent';
 
 class RegisterPlace extends Component {
     constructor(props){
         super(props);
 
         this.state = {
-            daysBeforePcrUrl: 'https://registrolocales-api.azurewebsites.net/env/setidbp',
-            daysBeforeSymptomsUrl: 'https://registrolocales-api.azurewebsites.net/env/setdapi',
-            minutesForContactUrl: 'https://registrolocales-api.azurewebsites.net/env/setmfdc',
             error: false,
             token: props.location.token,
-            daysBeforePcr: 2,
-            invalidDaysBeforePcr: false,
-            daysBeforeSymptoms: 7,
-            invalidDaysBeforeSymptoms: false,
-            minutesForContact: 15,
-            invalidMinutesForContact: false,
-            message: false
+            message: false,
+            variables: [],
+            getVariablesUrl: 'https://registrolocales-api.azurewebsites.net/env/getVariables'
         };
 
-        this.handleDaysBeforePcr = this.handleDaysBeforePcr.bind(this);
-        this.setDaysBeforePcr = this.setDaysBeforePcr.bind(this);
         this.handleAlertClose = this.handleAlertClose.bind(this);
-        this.handleDaysBeforeSymptoms = this.handleDaysBeforeSymptoms.bind(this);
-        this.setDaysBeforeSymptoms = this.setDaysBeforeSymptoms.bind(this);
-        this.handleMinutesForContact = this.handleMinutesForContact.bind(this);
-        this.setMinutesForContact = this.setMinutesForContact.bind(this);
+        this.getVariables = this.getVariables.bind(this);
     }
 
-    handleDaysBeforePcr(e) {
-        const input = e.target.value;
-        const numbers = input.replace(/[^0-9]/, '');
-        this.setState({
-            daysBeforePcr: numbers,
-            invalidDaysBeforePcr: false
-        });
-    }
-
-    async setDaysBeforePcr(e){
-        e.preventDefault();
-        const response = await getPost(this.state.daysBeforePcrUrl, 
-        {
-            "token": this.state.token,
-            "value": this.state.daysBeforePcr
-        });
-            
-        if(response.status != 201){
-            this.setState({
-                error: true
-            });
-        }
-        else{
-            this.setState({
-                message: true
-            });
-        }
-    }
-
-    handleDaysBeforeSymptoms(e) {
-        const input = e.target.value;
-        const numbers = input.replace(/[^0-9]/, '');
-        this.setState({
-            daysBeforeSymptoms: numbers,
-            invalidDaysBeforeSymptoms: false
-        });
-    }
-
-    async setDaysBeforeSymptoms(e){
-        e.preventDefault();
-        const response = await getPost(this.state.daysBeforeSymptomsUrl, 
-        {
-            "token": this.state.token,
-            "value": this.state.daysBeforeSymptoms
-        });
-            
-        if(response.status != 201){
-            this.setState({
-                error: true
-            });
-        }
-        else{
-            this.setState({
-                message: true
-            });
-        }
-    }
-
-    handleMinutesForContact(e) {
-        const input = e.target.value;
-        const numbers = input.replace(/[^0-9]/, '');
-        this.setState({
-            minutesForContact: numbers,
-            invalidMinutesForContact: false
-        });
-    }
-
-    async setMinutesForContact(e){
-        e.preventDefault();
-        const response = await getPost(this.state.minutesForContactUrl, 
-        {
-            "token": this.state.token,
-            "value": this.state.minutesForContact
-        });
-            
-        if(response.status != 201){
-            this.setState({
-                error: true
-            });
-        }
-        else{
-            this.setState({
-                message: true
-            });
-        }
+    componentDidMount(){
+        this.getVariables();
     }
 
     handleAlertClose(){
         this.setState({
             error: false,
             message: false
+        });
+    }
+
+    async getVariables(){
+        const response = await getOneParameterResponse(this.state.getVariablesUrl);
+        this.setState({
+            variables: response
         });
     }
 
@@ -141,6 +54,8 @@ class RegisterPlace extends Component {
             return null;
         }
         else{
+        const variables = this.state.variables;
+        const token = this.state.token;
         return(
             <div className="Form" style={{backgroundImage:"url('/img/green_background.jpg')"}}>
             <Grid container spacing={0} direction="column" alignItems="center" justify="center">
@@ -148,44 +63,17 @@ class RegisterPlace extends Component {
                     <h2 id="subtitlePanel">Variables de entorno</h2>
                     <CardContent>
                         <Grid container spacing={2} style={{justifyContent: "center", alignItems: "center"}}>
-                        <Grid item xs={12} sm={4}>
-                            <TextField className="InputVar" variant="filled" id="idbpField" type="number" label="Periodo de contagio previo a prueba" 
-                                onChange={this.handleDaysBeforePcr}
-                                value={this.state.daysBeforePcr}
-                                error={this.state.invalidDaysBeforePcr}
-                            />
-                            <Button variant="contained" color="primary" type="submit" id="saveIdbp" style={{verticalAlign: "bottom", margin: "5px"}}
-                                onClick={this.setDaysBeforePcr}>
-                                Guardar
-                            </Button>
-                            </Grid>
-                            <Grid item xs={12} sm={4}>
-                            <TextField className="InputVar" variant="filled" id="dapiField" type="number" label="Periodo de aparición de síntomas" 
-                                onChange={this.handleDaysBeforeSymptoms}
-                                value={this.state.daysBeforeSymptoms}
-                                error={this.state.invalidDaysBeforeSymptoms}
-                            />
-                            <Button variant="contained" color="primary" type="submit" id="saveDapi" style={{verticalAlign: "bottom", margin: "5px"}}
-                                onClick={this.setDaysBeforeSymptoms}>
-                                Guardar
-                            </Button>
-                            </Grid>
-                            <Grid item xs={12} sm={4}>
-                            <TextField className="InputVar" variant="filled" id="mfdcField" type="number" label="Minutos de contacto para ser estrecho" 
-                                onChange={this.handleMinutesForContact}
-                                value={this.state.minutesForContact}
-                                error={this.state.invalidMinutesForContact}
-                            />
-                            <Button variant="contained" color="primary" type="submit" id="saveMfdc" style={{verticalAlign: "bottom", margin: "5px"}}
-                                onClick={this.setMinutesForContact}>
-                                Guardar
-                            </Button>
-                            </Grid>
+                            {
+                                variables.map(function(item){
+                                    return(<VariableComponent key={item._id} name={item.name} value={item.value} description={item.description}
+                                        token={token}/>)
+                                })
+                            }
                         </Grid>
                         <Snackbar id="errorAlert" open={this.state.error} autoHideDuration={5000} onClose={this.handleAlertClose}
                             anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}>
                             <Alert severity="error" onClose={this.handleAlertClose}>
-                                Credenciales incorrectas
+                                Valor incorrecto
                             </Alert>
                         </Snackbar>
                         <Snackbar id="messageAlert" open={this.state.message} autoHideDuration={5000} onClose={this.handleAlertClose}
