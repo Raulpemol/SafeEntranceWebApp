@@ -36,3 +36,23 @@ export async function getOneParameterResponse(url = '', data = ''){
 
     return response.json();
 }
+
+export async function getResponseWithAuth(url = '', data = '', header = ''){
+    const response = await fetch(url + '/' + data.replace(" ", "%20").replace("&","%26"), {
+        method: 'GET',
+        mode: 'cors',
+        cache: 'no-cache',
+        credentials: 'same-origin',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'GET',
+            'token': header
+        },
+        redirect: 'follow',
+        referrerPolicy: 'no-referrer'
+    });
+
+    return response;
+}

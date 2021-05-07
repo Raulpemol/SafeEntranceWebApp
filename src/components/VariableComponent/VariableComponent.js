@@ -5,9 +5,11 @@ import Button from '@material-ui/core/Button';
 import { getPost } from '../../services/HttpManager';
 import Snackbar from '@material-ui/core/Snackbar';
 import Alert from '@material-ui/lab/Alert';
+import { useHistory } from "react-router";
 
 function VariableComponent(props){
     const { name, value, description, token } = props;
+    const history = useHistory();
     const baseApiUrl = 'https://registrolocales-api.azurewebsites.net/env/setVariable';
     const [state, setState] = useState({
         value: value,
@@ -43,6 +45,13 @@ function VariableComponent(props){
                 alert: true,
                 message: false
             });
+            if(response.status == 403){
+                localStorage.setItem("token", null);
+                history.push({
+                    pathname: "/login"
+                });
+                return null;
+            }
         }
         else{
             setState({

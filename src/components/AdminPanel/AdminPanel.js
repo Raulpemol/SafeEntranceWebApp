@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './AdminPanel.css';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
-import { getOneParameterResponse } from '../../services/HttpManager';
+import { getOneParameterResponse, getResponseWithAuth } from '../../services/HttpManager';
 import Grid from '@material-ui/core/Grid';
 import { withRouter } from 'react-router-dom';
 import VariableComponent from '../VariableComponent/VariableComponent';
@@ -16,14 +16,19 @@ class RegisterPlace extends Component {
             token: props.location.token,
             message: false,
             variables: [],
-            getVariablesUrl: 'https://registrolocales-api.azurewebsites.net/env/getVariables'
+            getVariablesUrl: 'https://registrolocales-api.azurewebsites.net/env/getVariables',
+            getAuthPanelUrl: 'https://registrolocales-api.azurewebsites.net/admin/panel'
         };
 
+        if(props.location.token != undefined)
+            localStorage.setItem("token", props.location.token);
+
         this.getVariables = this.getVariables.bind(this);
+        this.isLogged = this.isLogged.bind(this);
     }
 
     componentDidMount(){
-        this.getVariables();
+        this.isLogged();
     }
 
     async getVariables(){
@@ -33,12 +38,30 @@ class RegisterPlace extends Component {
         });
     }
 
-    render(){
-        if(this.state.token == "" || this.state.token == null || this.state.token == undefined){
+    async isLogged(){
+        const token = localStorage.getItem("token");
+        const response = await getResponseWithAuth(this.state.getAuthPanelUrl, "", token);
+        if(response.status == 403){
             this.props.history.push({
                 pathname: "/login"
             });
-            return null;
+        }
+        else{
+            const response = await getOneParameterResponse(this.state.getVariablesUrl);
+            this.setState({
+                variables: response
+            });
+        }
+    }
+
+    render(){
+        const localToken = localStorage.getItem("token");
+        if((this.state.token == "" || this.state.token == null || this.state.token == undefined) && 
+            (localToken == null || localToken == undefined)){
+                this.props.history.push({
+                    pathname: "/login"
+                });
+                return null;
         }
         else{
             const variables = this.state.variables;

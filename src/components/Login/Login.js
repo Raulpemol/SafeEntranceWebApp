@@ -54,6 +54,7 @@ class RegisterPlace extends Component {
         });
             
         if(response.status != 200){
+            localStorage.setItem("token", null);
             this.setState({
                 error: true,
                 errorField: true,
@@ -63,6 +64,7 @@ class RegisterPlace extends Component {
         else{
             const body = await response.json();
             const token = body["token"];
+            localStorage.setItem("token", token);
             
             this.props.history.push({
                 pathname: "/panel",
