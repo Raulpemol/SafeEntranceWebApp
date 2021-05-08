@@ -13,6 +13,7 @@ import SearchPlace from './components/SearchPlace/SearchPlace';
 import QRGenerator from './components/QRGenerator/QRGenerator';
 import Login from './components/Login/Login';
 import AdminPanel from './components/AdminPanel/AdminPanel';
+import ValidateAlerts from './components/ValidateAlerts/ValidateAlerts';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
@@ -97,6 +98,9 @@ function App() {
               </Route>
               <Route path="/panel">
                 <AdminPanel />
+              </Route>
+              <Route path="/alerts">
+                <ValidateAlerts />
               </Route>
               <Redirect to="/404" />
             </Switch>

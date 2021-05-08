@@ -18,11 +18,11 @@ const useStyles = makeStyles({
       alignItems: "initial",
       justifyContent: "center",
       textAlign: "initial",
-      marginLeft: "20%",
+      marginLeft: "10%",
       marginRight: "10%"
     },
     text: {
-        margin: "0px"
+        margin: "5px"
     },
     leftColumn: {
         flexDirection: "row",
@@ -30,7 +30,7 @@ const useStyles = makeStyles({
         justifyContent: "initial"
     },
     button:{
-        margin: "10px", 
+        margin: "5%",
         verticalAlign: "bottom"
     }
   });

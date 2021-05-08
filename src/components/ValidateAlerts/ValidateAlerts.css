@@ -1,0 +1,19 @@
+.FormValidate{
+    display: flex;
+    height: 92vh;
+    background-repeat: no-repeat;
+    background-size: cover;
+    align-content: center;
+}
+
+#CardValidate::-webkit-scrollbar {
+    display: none;
+}
+
+#CardValidate{
+    align-content: initial;
+    width: 80%;
+    height: 80%;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
