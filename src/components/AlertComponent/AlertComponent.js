@@ -3,6 +3,7 @@ import Card from '@material-ui/core/Card';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
+import { getPost } from '../../services/HttpManager';
 
 const useStyles = makeStyles({
     root: {
@@ -36,7 +37,17 @@ const useStyles = makeStyles({
   });
 
 function AlertComponent(props){
-    const { id, creationDate } = props;
+    const { id, code, creationDate } = props;
+    const validateUrl = "https://registrolocales-api.azurewebsites.net/api/alerts/validate";
+    const deleteUrl = "https://registrolocales-api.azurewebsites.net/api/alerts/deleteNotValid";
+
+    function validateAlert(){
+        getPost(validateUrl, {_id: id});
+    }
+
+    function deleteAlert(){
+        getPost(deleteUrl, {_id: id});
+    }
 
     return(
         <Card variant="outlined" className={useStyles().root}>
@@ -44,7 +55,7 @@ function AlertComponent(props){
                 <Grid item xs={12} sm container>
                     <Grid item xs container direction="column" spacing={2} className={useStyles().leftColumn}>
                         <Grid item className={useStyles().textItem}>
-                            <p className={useStyles().text}>ID: {id}</p>
+                            <p className={useStyles().text}>Código: {code}</p>
                         </Grid>
                         <Grid item className={useStyles().textItem}>
                             <p className={useStyles().text}>Fecha: {creationDate}</p>
@@ -52,10 +63,10 @@ function AlertComponent(props){
                     </Grid>
                 </Grid>
                 <Grid item xs={6} sm={6} container direction="row">
-                    <Button variant="contained" color="primary" className={useStyles().button}>
+                    <Button variant="contained" color="primary" className={useStyles().button} onClick={validateAlert}>
                         Validar
                     </Button>
-                    <Button variant="contained" color="secondary" className={useStyles().button}>
+                    <Button variant="contained" color="secondary" className={useStyles().button} onClick={deleteAlert}>
                         Eliminar
                     </Button>
                 </Grid>

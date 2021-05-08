@@ -29,7 +29,7 @@ class ValidateAlerts extends Component {
 
     async getAlerts(){
         const response = await getOneParameterResponse(this.state.url);
-        if(response.status == 400 || response.length < 1){
+        if(response.count < 1){
             this.setState({
                 error: true,
                 invalidAddress: true
@@ -59,14 +59,14 @@ class ValidateAlerts extends Component {
                             <div id="alertsList" style={{margin: "10px", display: "inline-grid"}}>
                                 {
                                     data.map(function(item){
-                                        return(<AlertComponent key={item._id} id={item._id} creationDate={item.alertDate}/>)
+                                        return(<AlertComponent key={item._id} id={item._id} code={item.code} creationDate={item.alertDate}/>)
                                     })
                                 }
                             </div>
                             <Snackbar id="notExistsAlert" open={this.state.error} autoHideDuration={5000} onClose={this.handleAlertClose}
                                 anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}>
                                 <Alert severity="error" onClose={this.handleAlertClose}>
-                                    Error al recuperar las alertas
+                                    No se han recuperado alertas
                                 </Alert>
                             </Snackbar>
                         </CardContent>

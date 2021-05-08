@@ -33,7 +33,7 @@ export async function getOneParameterResponse(url = '', data = ''){
         redirect: 'follow',
         referrerPolicy: 'no-referrer'
     });
-
+    
     return response.json();
 }
 
