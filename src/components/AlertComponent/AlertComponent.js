@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Card from '@material-ui/core/Card';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
@@ -40,39 +40,58 @@ function AlertComponent(props){
     const { id, code, creationDate } = props;
     const validateUrl = "https://registrolocales-api.azurewebsites.net/api/alerts/validate";
     const deleteUrl = "https://registrolocales-api.azurewebsites.net/api/alerts/deleteNotValid";
+    const [state, setState] = useState({
+        showAlert: true
+    });
+    const styles = useStyles();
 
-    function validateAlert(){
-        getPost(validateUrl, {_id: id});
+    async function validateAlert(){
+        const response = await getPost(validateUrl, {_id: id});
+        if(response.status == 200){
+            setState({
+                showAlert: false
+            });
+        }
     }
 
-    function deleteAlert(){
-        getPost(deleteUrl, {_id: id});
+    async function deleteAlert(){
+        const response = await getPost(deleteUrl, {_id: id});
+        if(response.status == 200){
+            setState({
+                showAlert: false
+            });
+        }
     }
 
-    return(
-        <Card variant="outlined" className={useStyles().root}>
-            <Grid container spacing={2} style={{justifyContent: "center", alignItems: "center"}}>
-                <Grid item xs={12} sm container>
-                    <Grid item xs container direction="column" spacing={2} className={useStyles().leftColumn}>
-                        <Grid item className={useStyles().textItem}>
-                            <p className={useStyles().text}>Código: {code}</p>
-                        </Grid>
-                        <Grid item className={useStyles().textItem}>
-                            <p className={useStyles().text}>Fecha: {creationDate}</p>
+    if(state.showAlert){
+        return(
+            <Card variant="outlined" className={styles.root}>
+                <Grid container spacing={2} style={{justifyContent: "center", alignItems: "center"}}>
+                    <Grid item xs={12} sm container>
+                        <Grid item xs container direction="column" spacing={2} className={styles.leftColumn}>
+                            <Grid item className={styles.textItem}>
+                                <p className={styles.text}>Código: {code}</p>
+                            </Grid>
+                            <Grid item className={styles.textItem}>
+                                <p className={styles.text}>Fecha: {creationDate}</p>
+                            </Grid>
                         </Grid>
                     </Grid>
+                    <Grid item xs={6} sm={6} container direction="row">
+                        <Button variant="contained" color="primary" className={styles.button} onClick={validateAlert}>
+                            Validar
+                        </Button>
+                        <Button variant="contained" color="secondary" className={styles.button} onClick={deleteAlert}>
+                            Eliminar
+                        </Button>
+                    </Grid>
                 </Grid>
-                <Grid item xs={6} sm={6} container direction="row">
-                    <Button variant="contained" color="primary" className={useStyles().button} onClick={validateAlert}>
-                        Validar
-                    </Button>
-                    <Button variant="contained" color="secondary" className={useStyles().button} onClick={deleteAlert}>
-                        Eliminar
-                    </Button>
-                </Grid>
-            </Grid>
-        </Card>
-    );
+            </Card>
+        );
+    }
+    else{
+        return(null);
+    }
 }
 
 export default AlertComponent;
