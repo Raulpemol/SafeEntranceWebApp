@@ -1,7 +1,7 @@
 import React from 'react';
 import Card from '@material-ui/core/Card';
-import QRcode from 'qrcode.react';
 import Grid from '@material-ui/core/Grid';
+import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles({
@@ -28,11 +28,15 @@ const useStyles = makeStyles({
         flexDirection: "row",
         alignItems: "initial",
         justifyContent: "initial"
+    },
+    button:{
+        margin: "10px", 
+        verticalAlign: "bottom"
     }
   });
 
-function PlaceComponent(props){
-    const { placeName, id, address, capacity } = props;
+function AlertComponent(props){
+    const { id, creationDate } = props;
 
     return(
         <Card variant="outlined" className={useStyles().root}>
@@ -40,26 +44,24 @@ function PlaceComponent(props){
                 <Grid item xs={12} sm container>
                     <Grid item xs container direction="column" spacing={2} className={useStyles().leftColumn}>
                         <Grid item className={useStyles().textItem}>
-                            <p className={useStyles().text}>Nombre: {placeName}</p>
+                            <p className={useStyles().text}>ID: {id}</p>
                         </Grid>
                         <Grid item className={useStyles().textItem}>
-                            <p className={useStyles().text}>Dirección: {address}</p>
-                        </Grid>
-                        <Grid item className={useStyles().textItem}>
-                            <p className={useStyles().text}>Aforo máximo: {capacity}</p>
+                            <p className={useStyles().text}>Fecha: {creationDate}</p>
                         </Grid>
                     </Grid>
                 </Grid>
-                <Grid item>
-                <QRcode 
-                    value={id} 
-                    size={200}
-                    style={{margin: "10px"}}
-                />
+                <Grid item xs={6} sm={6} container direction="row">
+                    <Button variant="contained" color="primary" className={useStyles().button}>
+                        Validar
+                    </Button>
+                    <Button variant="contained" color="secondary" className={useStyles().button}>
+                        Eliminar
+                    </Button>
                 </Grid>
             </Grid>
         </Card>
     );
 }
 
-export default PlaceComponent;
+export default AlertComponent;

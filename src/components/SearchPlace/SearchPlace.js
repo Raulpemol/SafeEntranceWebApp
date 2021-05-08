@@ -7,7 +7,6 @@ import Button from '@material-ui/core/Button';
 import { getOneParameterResponse } from '../../services/HttpManager';
 import Grid from '@material-ui/core/Grid';
 import { withRouter } from 'react-router-dom';
-import { Base64 } from "js-base64";
 import Snackbar from '@material-ui/core/Snackbar';
 import Alert from '@material-ui/lab/Alert';
 import SearchIcon from '@material-ui/icons/Search';
