@@ -15,6 +15,7 @@ import QRGenerator from './components/QRGenerator/QRGenerator';
 import Login from './components/Login/Login';
 import AdminPanel from './components/AdminPanel/AdminPanel';
 import ValidateAlerts from './components/ValidateAlerts/ValidateAlerts';
+import PrivacyTerms from './components/PrivacyTerms/PrivacyTerms';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
@@ -106,7 +107,7 @@ function App() {
                   <ValidateAlerts />
                 </Route>
                 <Route path="/aviso-legal">
-                  <ValidateAlerts />
+                  <PrivacyTerms />
                 </Route>
                 <Redirect to="/404" />
               </Switch>

@@ -1,0 +1,19 @@
+.MainTerms{
+    display: grid;
+    height: 92vh;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#CardTerms{
+    margin: 5%;
+    text-align: left;
+    align-content: initial;
+    padding: 20px;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+#CardTerms::-webkit-scrollbar {
+    display: none;
+}
