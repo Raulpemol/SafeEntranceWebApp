@@ -3,7 +3,8 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Redirect
+  Redirect,
+  Link
 } from "react-router-dom";
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
@@ -69,44 +70,52 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
-        <h1 id="title">SafeEntrance</h1>
-      </header>
-      <main>
-        <Router>
-          <div>
-            <Switch>
-              <Route exact path="/">
-                <AppBar position="relative">
-                  <Tabs value={value} onChange={handleChange} centered indicatorColor="primary" textColor="primary" className={useStyles().tabBar}>
-                    <Tab label="Registrar local" icon={<CreateIcon/>}{...a11yProps(0)} id="registerNavButton"/>
-                    <Tab label="Buscar local" icon={<SearchIcon/>} {...a11yProps(1)} id="searchNavButton"/>
-                  </Tabs>
-                </AppBar>
-                <TabPanel value={value} index={0}>
-                  <RegisterPlace />
-                </TabPanel>
-                <TabPanel value={value} index={1}>
-                  <SearchPlace />
-                </TabPanel>
-              </Route>
-              <Route path="/generated_qr/:id">
-                <QRGenerator />
-              </Route>
-              <Route path="/login">
-                <Login />
-              </Route>
-              <Route path="/panel">
-                <AdminPanel />
-              </Route>
-              <Route path="/alerts">
-                <ValidateAlerts />
-              </Route>
-              <Redirect to="/404" />
-            </Switch>
-          </div>
-        </Router>
-      </main>
+      <Router>
+        <header className="App-header">
+          <h1>
+            <Link className="link" id="title" to={{ pathname: "/" }}> SafeEntrance </Link>
+          </h1>
+        </header>
+        <main>
+            <div>
+              <Switch>
+                <Route exact path="/">
+                  <AppBar position="relative">
+                    <Tabs value={value} onChange={handleChange} centered indicatorColor="primary" textColor="primary" className={useStyles().tabBar}>
+                      <Tab label="Registrar local" icon={<CreateIcon/>}{...a11yProps(0)} id="registerNavButton"/>
+                      <Tab label="Buscar local" icon={<SearchIcon/>} {...a11yProps(1)} id="searchNavButton"/>
+                    </Tabs>
+                  </AppBar>
+                  <TabPanel value={value} index={0}>
+                    <RegisterPlace />
+                  </TabPanel>
+                  <TabPanel value={value} index={1}>
+                    <SearchPlace />
+                  </TabPanel>
+                </Route>
+                <Route path="/generated_qr/:id">
+                  <QRGenerator />
+                </Route>
+                <Route path="/login">
+                  <Login />
+                </Route>
+                <Route path="/panel">
+                  <AdminPanel />
+                </Route>
+                <Route path="/alerts">
+                  <ValidateAlerts />
+                </Route>
+                <Route path="/aviso-legal">
+                  <ValidateAlerts />
+                </Route>
+                <Redirect to="/404" />
+              </Switch>
+            </div>
+        </main>
+        <footer className="App-footer">
+          <Link className="link" to={{ pathname: "/aviso-legal" }}>Aviso legal y política de privacidad</Link>
+        </footer>
+      </Router>
     </div>
   );
 }
